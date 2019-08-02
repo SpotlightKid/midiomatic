@@ -54,116 +54,60 @@ void PluginMIDISysFilter::initParameter(uint32_t index, Parameter& parameter) {
             parameter.name = "Filter Mode";
             parameter.symbol = "filter_mode";
             parameter.hints = kParameterIsAutomable | kParameterIsInteger;
-#if defined(DISTRHO_PLUGIN_TARGET_VST)
-            modes[0].label = "Only block disabled";
-#else
             modes[0].label = "Block disabled event types, pass all others";
-#endif
             modes[0].value = 0;
-#if defined(DISTRHO_PLUGIN_TARGET_VST)
-            modes[1].label = "Pass only enabled";
-#else
             modes[1].label = "Pass enabled event types, block all others";
-#endif
             modes[1].value = 1;
             parameter.enumValues.count = 2;
             parameter.enumValues.restrictedMode = true;
             parameter.enumValues.values = modes;
             break;
         case paramSystemExclusive:
-#if defined(DISTRHO_PLUGIN_TARGET_VST)
-            parameter.name = "F0-SysEx";
-#else
             parameter.name = "System Exclusive (F0)";
-#endif
             parameter.symbol = "sysex";
             break;
         case paramMTCQuarterFrame:
-#if defined(DISTRHO_PLUGIN_TARGET_VST)
-            parameter.name = "F1-MTC";
-#else
             parameter.name = "MTC Quarter Frame (F1)";
-#endif
             parameter.symbol = "mtc_quarter_frame";
             break;
         case paramSongPositionPointer:
-#if defined(DISTRHO_PLUGIN_TARGET_VST)
-            parameter.name = "F2-SPP";
-#else
             parameter.name = "Song Position Pointer (F2)";
-#endif
             parameter.symbol = "song_position_pointer";
             break;
         case paramSongSelect:
-#if defined(DISTRHO_PLUGIN_TARGET_VST)
-            parameter.name = "F3-SS";
-#else
             parameter.name = "Song Select (F3)";
-#endif
             parameter.symbol = "song_select";
             break;
         case paramTuneRequest:
-#if defined(DISTRHO_PLUGIN_TARGET_VST)
-            parameter.name = "F6-Tune Request";
-#else
             parameter.name = "Tune Request (F6)";
-#endif
             parameter.symbol = "tune_request";
             break;
         case paramTimingClock:
-#if defined(DISTRHO_PLUGIN_TARGET_VST)
-            parameter.name = "F8-Clock";
-#else
             parameter.name = "Timing Clock (F8)";
-#endif
             parameter.symbol = "timing_clock";
             break;
         case paramStart:
-#if defined(DISTRHO_PLUGIN_TARGET_VST)
-            parameter.name = "FA-Start";
-#else
             parameter.name = "Start (FA)";
-#endif
             parameter.symbol = "start";
             break;
         case paramContinue:
-#if defined(DISTRHO_PLUGIN_TARGET_VST)
-            parameter.name = "FB-Continue";
-#else
             parameter.name = "Continue (FB)";
-#endif
             parameter.symbol = "continue";
             break;
         case paramStop:
-#if defined(DISTRHO_PLUGIN_TARGET_VST)
-            parameter.name = "FC-Stop";
-#else
             parameter.name = "Stop (FC)";
-#endif
             parameter.symbol = "stop";
             break;
         case paramActiveSensing:
-#if defined(DISTRHO_PLUGIN_TARGET_VST)
-            parameter.name = "FE-Active Sense";
-#else
             parameter.name = "Active Sensing (FE)";
-#endif
             parameter.symbol = "active_sensing";
             break;
         case paramSystemReset:
-#if defined(DISTRHO_PLUGIN_TARGET_VST)
-            parameter.name = "FF-Reset";
-#else
             parameter.name = "System Reset (FF)";
-#endif
             parameter.symbol = "system_reset";
             break;
         case paramUndefined:
-#if defined(DISTRHO_PLUGIN_TARGET_VST)
-            parameter.name = "Undefined";
-#else
             parameter.name = "Undefined (F4/F5/F9/FD)";
-#endif
             parameter.symbol = "undefined";
             break;
     }
