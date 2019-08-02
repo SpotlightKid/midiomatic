@@ -28,8 +28,8 @@
 #define DISTRHO_PLUGIN_INFO_H
 
 #define DISTRHO_PLUGIN_BRAND "chrisarndt.de"
-#define DISTRHO_PLUGIN_NAME  "MIDIXForm"
-#define DISTRHO_PLUGIN_URI   "https://chrisarndt.de/plugins/midixform"
+#define DISTRHO_PLUGIN_NAME  "MIDISysFilter"
+#define DISTRHO_PLUGIN_URI   "https://chrisarndt.de/plugins/midisysfilter"
 
 #define DISTRHO_PLUGIN_HAS_UI        0
 #define DISTRHO_UI_USE_NANOVG        0

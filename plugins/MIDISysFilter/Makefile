@@ -18,14 +18,14 @@ VST_DIR ?= $(LIBDIR)/vst
 # --------------------------------------------------------------
 # Project name, used for binaries
 
-NAME = midixform
+NAME = midisysfilter
 
 # --------------------------------------------------------------
 # Plugin types to build
 
 BUILD_LV2 ?= true
 BUILD_VST2 ?= true
-BUILD_JACK ?= true
+BUILD_JACK ?= false
 BUILD_DSSI ?= false
 BUILD_LADSPA ?= false
 
@@ -33,7 +33,7 @@ BUILD_LADSPA ?= false
 # Files to build
 
 FILES_DSP = \
-	PluginMIDIXForm.cpp
+	PluginMIDISysFilter.cpp
 
 # --------------------------------------------------------------
 # Do some magic

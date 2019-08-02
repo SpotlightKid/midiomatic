@@ -1,3 +1,3 @@
-# MIDI XForm
+# MIDI SysFilter
 
-A collection of MIDI processors
+A filter for MIDI System Messages

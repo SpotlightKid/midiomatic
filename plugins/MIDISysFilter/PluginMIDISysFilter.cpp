@@ -1,5 +1,5 @@
 /*
- * MIDI XForm audio effect based on DISTRHO Plugin Framework (DPF)
+ * MIDI SysFilter plugin based on DISTRHO Plugin Framework (DPF)
  *
  * SPDX-License-Identifier: MIT
  *
@@ -24,13 +24,13 @@
  * IN THE SOFTWARE.
  */
 
-#include "PluginMIDIXForm.hpp"
+#include "PluginMIDISysFilter.hpp"
 
 START_NAMESPACE_DISTRHO
 
 // -----------------------------------------------------------------------
 
-PluginMIDIXForm::PluginMIDIXForm()
+PluginMIDISysFilter::PluginMIDISysFilter()
     : Plugin(paramCount, 12, 0)  // paramCount params, 12 program(s), 0 states
 {
     loadProgram(0);
@@ -39,7 +39,7 @@ PluginMIDIXForm::PluginMIDIXForm()
 // -----------------------------------------------------------------------
 // Init
 
-void PluginMIDIXForm::initParameter(uint32_t index, Parameter& parameter) {
+void PluginMIDISysFilter::initParameter(uint32_t index, Parameter& parameter) {
     if (index >= paramCount)
         return;
 
@@ -117,7 +117,7 @@ void PluginMIDIXForm::initParameter(uint32_t index, Parameter& parameter) {
   Set the name of the program @a index.
   This function will be called once, shortly after the plugin is created.
 */
-void PluginMIDIXForm::initProgramName(uint32_t index, String& programName) {
+void PluginMIDISysFilter::initProgramName(uint32_t index, String& programName) {
     switch (index) {
         case 0:
             programName = "Pass-through";
@@ -164,21 +164,21 @@ void PluginMIDIXForm::initProgramName(uint32_t index, String& programName) {
 /**
   Optional callback to inform the plugin about a sample rate change.
 */
-void PluginMIDIXForm::sampleRateChanged(double newSampleRate) {
+void PluginMIDISysFilter::sampleRateChanged(double newSampleRate) {
     (void) newSampleRate;
 }
 
 /**
   Get the current value of a parameter.
 */
-float PluginMIDIXForm::getParameterValue(uint32_t index) const {
+float PluginMIDISysFilter::getParameterValue(uint32_t index) const {
     return fParams[index];
 }
 
 /**
   Change a parameter value.
 */
-void PluginMIDIXForm::setParameterValue(uint32_t index, float value) {
+void PluginMIDISysFilter::setParameterValue(uint32_t index, float value) {
     fParams[index] = value;
 }
 
@@ -187,7 +187,7 @@ void PluginMIDIXForm::setParameterValue(uint32_t index, float value) {
   The host may call this function from any context,
   including realtime processing.
 */
-void PluginMIDIXForm::loadProgram(uint32_t index) {
+void PluginMIDISysFilter::loadProgram(uint32_t index) {
     switch (index) {
         case 0:  // Pass-through
             setParameterValue(paramFilterMode, 0.0f);
@@ -292,14 +292,14 @@ void PluginMIDIXForm::loadProgram(uint32_t index) {
 // -----------------------------------------------------------------------
 // Process
 
-void PluginMIDIXForm::activate() {
+void PluginMIDISysFilter::activate() {
     // plugin is activated
 }
 
 
 
-void PluginMIDIXForm::run(const float**, float**, uint32_t,
-                          const MidiEvent* events, uint32_t eventCount) {
+void PluginMIDISysFilter::run(const float**, float**, uint32_t,
+                              const MidiEvent* events, uint32_t eventCount) {
     bool pass;
 
     for (uint32_t i=0; i<eventCount; ++i) {
@@ -361,7 +361,7 @@ void PluginMIDIXForm::run(const float**, float**, uint32_t,
 // -----------------------------------------------------------------------
 
 Plugin* createPlugin() {
-    return new PluginMIDIXForm();
+    return new PluginMIDISysFilter();
 }
 
 // -----------------------------------------------------------------------

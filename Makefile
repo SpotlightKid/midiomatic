@@ -16,7 +16,7 @@ submodules:
 libs:
 
 plugins: libs
-	$(MAKE) all -C plugins/MIDIXForm
+	$(MAKE) all -C plugins/MIDISysFilter
 
 ifneq ($(CROSS_COMPILING),true)
 gen: plugins dpf/utils/lv2_ttl_generator
@@ -35,14 +35,14 @@ endif
 
 clean:
 	$(MAKE) clean -C dpf/utils/lv2-ttl-generator
-	$(MAKE) clean -C plugins/MIDIXForm
+	$(MAKE) clean -C plugins/MIDISysFilter
 	rm -rf bin build
 
 install: all
-	$(MAKE) install -C plugins/MIDIXForm
+	$(MAKE) install -C plugins/MIDISysFilter
 
 install-user: all
-	$(MAKE) install-user -C plugins/MIDIXForm
+	$(MAKE) install-user -C plugins/MIDISysFilter
 
 # --------------------------------------------------------------
 

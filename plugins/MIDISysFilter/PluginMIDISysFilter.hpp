@@ -1,5 +1,5 @@
 /*
- * MIDI XForm audio effect based on DISTRHO Plugin Framework (DPF)
+ * MIDI SysFilter plugin based on DISTRHO Plugin Framework (DPF)
  *
  * SPDX-License-Identifier: MIT
  *
@@ -24,8 +24,8 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef PLUGIN_MIDIXFORM_H
-#define PLUGIN_MIDIXFORM_H
+#ifndef PLUGIN_MIDISYSFILTER_H
+#define PLUGIN_MIDISYSFILTER_H
 
 #include "DistrhoPlugin.hpp"
 
@@ -50,7 +50,7 @@ START_NAMESPACE_DISTRHO
 
 // -----------------------------------------------------------------------
 
-class PluginMIDIXForm : public Plugin {
+class PluginMIDISysFilter : public Plugin {
 public:
     enum Parameters {
         paramFilterMode,
@@ -69,18 +69,18 @@ public:
         paramCount
     };
 
-    PluginMIDIXForm();
+    PluginMIDISysFilter();
 
 protected:
     // -------------------------------------------------------------------
     // Information
 
     const char* getLabel() const noexcept override {
-        return "MIDIXForm";
+        return "MIDISysFilter";
     }
 
     const char* getDescription() const override {
-        return "A collection of MIDI processors";
+        return "A filter for MIDI System Messages";
     }
 
     const char* getMaker() const noexcept override {
@@ -88,7 +88,7 @@ protected:
     }
 
     const char* getHomePage() const override {
-        return "https://chrisarndt.de/plugins/midixform";
+        return "https://chrisarndt.de/plugins/midisysfilter";
     }
 
     const char* getLicense() const noexcept override {
@@ -105,7 +105,7 @@ protected:
     //
     // Get a proper plugin UID and fill it in here!
     int64_t getUniqueId() const noexcept override {
-        return d_cconst('M', 'X', 'F', 'm');
+        return d_cconst('M', 'S', 'y', 'F');
     }
 
     // -------------------------------------------------------------------
@@ -141,11 +141,11 @@ protected:
 private:
     float fParams[paramCount];
 
-    DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginMIDIXForm)
+    DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginMIDISysFilter)
 };
 
 // -----------------------------------------------------------------------
 
 END_NAMESPACE_DISTRHO
 
-#endif  // #ifndef PLUGIN_MIDIXFORM_H
+#endif  // #ifndef PLUGIN_MIDISYSFILTER_H
