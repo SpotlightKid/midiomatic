@@ -54,9 +54,9 @@ void PluginMIDISysFilter::initParameter(uint32_t index, Parameter& parameter) {
             parameter.name = "Filter Mode";
             parameter.symbol = "filter_mode";
             parameter.hints = kParameterIsAutomable | kParameterIsInteger;
-            modes[0].label = "Block disabled event types, pass all others";
+            modes[0].label = "Block disabled events (pass all others)";
             modes[0].value = 0;
-            modes[1].label = "Pass enabled event types, block all others";
+            modes[1].label = "Pass enabled events (block all others)";
             modes[1].value = 1;
             parameter.enumValues.count = 2;
             parameter.enumValues.restrictedMode = true;
@@ -64,50 +64,62 @@ void PluginMIDISysFilter::initParameter(uint32_t index, Parameter& parameter) {
             break;
         case paramSystemExclusive:
             parameter.name = "System Exclusive (F0)";
+            parameter.shortName = "F0: SysEx";
             parameter.symbol = "sysex";
             break;
         case paramMTCQuarterFrame:
             parameter.name = "MTC Quarter Frame (F1)";
+            parameter.shortName = "F1: MTC";
             parameter.symbol = "mtc_quarter_frame";
             break;
         case paramSongPositionPointer:
             parameter.name = "Song Position Pointer (F2)";
+            parameter.shortName = "F2: SPP";
             parameter.symbol = "song_position_pointer";
             break;
         case paramSongSelect:
             parameter.name = "Song Select (F3)";
+            parameter.shortName = "F3: SS";
             parameter.symbol = "song_select";
             break;
         case paramTuneRequest:
             parameter.name = "Tune Request (F6)";
+            parameter.shortName = "F6: Tune Req.";
             parameter.symbol = "tune_request";
             break;
         case paramTimingClock:
             parameter.name = "Timing Clock (F8)";
+            parameter.shortName = "F8: Clock";
             parameter.symbol = "timing_clock";
             break;
         case paramStart:
             parameter.name = "Start (FA)";
+            parameter.shortName = "FA: Start";
             parameter.symbol = "start";
             break;
         case paramContinue:
             parameter.name = "Continue (FB)";
+            parameter.shortName = "FB: Cont.";
             parameter.symbol = "continue";
             break;
         case paramStop:
             parameter.name = "Stop (FC)";
+            parameter.shortName = "FC: Stop";
             parameter.symbol = "stop";
             break;
         case paramActiveSensing:
             parameter.name = "Active Sensing (FE)";
+            parameter.shortName = "FE: Act. Sens.";
             parameter.symbol = "active_sensing";
             break;
         case paramSystemReset:
             parameter.name = "System Reset (FF)";
+            parameter.shortName = "FF: Reset";
             parameter.symbol = "system_reset";
             break;
         case paramUndefined:
             parameter.name = "Undefined (F4/F5/F9/FD)";
+            parameter.shortName = "F4/F5/F9/FD";
             parameter.symbol = "undefined";
             break;
     }
