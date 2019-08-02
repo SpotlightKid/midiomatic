@@ -24,8 +24,6 @@
  * IN THE SOFTWARE.
  */
 
-#include <math.h>
-
 #include "PluginMIDIXForm.hpp"
 
 START_NAMESPACE_DISTRHO
@@ -33,9 +31,8 @@ START_NAMESPACE_DISTRHO
 // -----------------------------------------------------------------------
 
 PluginMIDIXForm::PluginMIDIXForm()
-    : Plugin(paramCount, 1, 0)  // paramCount params, 1 program(s), 0 states
+    : Plugin(paramCount, 12, 0)  // paramCount params, 12 program(s), 0 states
 {
-    sampleRateChanged(getSampleRate());
     loadProgram(0);
 }
 
@@ -46,15 +43,72 @@ void PluginMIDIXForm::initParameter(uint32_t index, Parameter& parameter) {
     if (index >= paramCount)
         return;
 
+    ParameterEnumerationValue* const modes = new ParameterEnumerationValue[2];
+    parameter.hints = kParameterIsAutomable | kParameterIsBoolean;
+    parameter.ranges.def = 0.0f;
     parameter.ranges.min = 0.0f;
     parameter.ranges.max = 1.0f;
-    parameter.ranges.def = 0.1f;
-    parameter.hints = kParameterIsAutomable | kParameterIsLogarithmic;
 
     switch (index) {
-        case paramVolume:
-            parameter.name = "Volume";
-            parameter.symbol = "volume";
+        case paramFilterMode:
+            parameter.name = "Filter Mode";
+            parameter.symbol = "filter_mode";
+            parameter.hints = kParameterIsAutomable | kParameterIsInteger;
+            modes[0].label = "Only block disabled";
+            modes[0].value = 0;
+            modes[1].label = "Pass only enabled";
+            modes[1].value = 1;
+            parameter.enumValues.count = 2;
+            parameter.enumValues.restrictedMode = true;
+            parameter.enumValues.values = modes;
+            break;
+        case paramSystemExclusive:
+            parameter.name = " F0-SysEx";
+            parameter.symbol = "sysex";
+            break;
+        case paramMTCQuarterFrame:
+            parameter.name = "F1-MTC";
+            parameter.symbol = "mtc_quarter_frame";
+            break;
+        case paramSongPositionPointer:
+            parameter.name = "F2-SPP";
+            parameter.symbol = "song_position_pointer";
+            break;
+        case paramSongSelect:
+            parameter.name = "F3-SS";
+            parameter.symbol = "song_select";
+            break;
+        case paramTuneRequest:
+            parameter.name = "F6-Tune Request";
+            parameter.symbol = "tune_request";
+            break;
+        case paramTimingClock:
+            parameter.name = "F8-Clock";
+            parameter.symbol = "timing_clock";
+            break;
+        case paramStart:
+            parameter.name = "FA-Start";
+            parameter.symbol = "start";
+            break;
+        case paramContinue:
+            parameter.name = "FB-Continue";
+            parameter.symbol = "continue";
+            break;
+        case paramStop:
+            parameter.name = "FC-Stop";
+            parameter.symbol = "stop";
+            break;
+        case paramActiveSensing:
+            parameter.name = "FE-Active Sense";
+            parameter.symbol = "active_sensing";
+            break;
+        case paramSystemReset:
+            parameter.name = "FF-Reset";
+            parameter.symbol = "system_reset";
+            break;
+        case paramUndefined:
+            parameter.name = "Undefined";
+            parameter.symbol = "undefined";
             break;
     }
 }
@@ -66,7 +120,40 @@ void PluginMIDIXForm::initParameter(uint32_t index, Parameter& parameter) {
 void PluginMIDIXForm::initProgramName(uint32_t index, String& programName) {
     switch (index) {
         case 0:
-            programName = "Default";
+            programName = "Pass-through";
+            break;
+        case 1:
+            programName = "Block any System message";
+            break;
+        case 2:
+            programName = "Block System Exclusive";
+            break;
+        case 3:
+            programName = "Block System Common";
+            break;
+        case 4:
+            programName = "Block System Real-Time";
+            break;
+        case 5:
+            programName = "Block Undefined";
+            break;
+        case 6:
+            programName = "Block Active Sensing";
+            break;
+        case 7:
+            programName = "Block Timing Clock";
+            break;
+        case 8:
+            programName = "Pass System messages only";
+            break;
+        case 9:
+            programName = "Pass System Exclusive only";
+            break;
+        case 10:
+            programName = "Pass System Common only";
+            break;
+        case 11:
+            programName = "Pass System Real-Time only";
             break;
     }
 }
@@ -78,7 +165,7 @@ void PluginMIDIXForm::initProgramName(uint32_t index, String& programName) {
   Optional callback to inform the plugin about a sample rate change.
 */
 void PluginMIDIXForm::sampleRateChanged(double newSampleRate) {
-    fSampleRate = newSampleRate;
+    (void) newSampleRate;
 }
 
 /**
@@ -93,12 +180,6 @@ float PluginMIDIXForm::getParameterValue(uint32_t index) const {
 */
 void PluginMIDIXForm::setParameterValue(uint32_t index, float value) {
     fParams[index] = value;
-
-    switch (index) {
-        case paramVolume:
-            // do something when volume param is set
-            break;
-    }
 }
 
 /**
@@ -108,8 +189,102 @@ void PluginMIDIXForm::setParameterValue(uint32_t index, float value) {
 */
 void PluginMIDIXForm::loadProgram(uint32_t index) {
     switch (index) {
-        case 0:
-            setParameterValue(paramVolume, 0.1f);
+        case 0:  // Pass-through
+            setParameterValue(paramFilterMode, 0.0f);
+            for (int i=1; i<paramCount; i++) {
+                setParameterValue(i, 1.0f);
+            }
+            break;
+        case 1:  // Block any System messages
+            setParameterValue(paramFilterMode, 0.0f);
+            for (int i=1; i<paramCount; i++) {
+                setParameterValue(i, 0.0f);
+            }
+            break;
+        case 2:  // Block System Exclusive
+            setParameterValue(paramFilterMode, 0.0f);
+            for (int i=1; i<paramCount; i++) {
+                setParameterValue(i, 1.0f);
+            }
+            setParameterValue(paramSystemExclusive, 0.0f);
+            break;
+        case 3:  // Block System Common
+            setParameterValue(paramFilterMode, 0.0f);
+            for (int i=1; i<paramCount; i++) {
+                setParameterValue(i, 1.0f);
+            }
+            setParameterValue(paramMTCQuarterFrame, 0.0f);
+            setParameterValue(paramSongPositionPointer, 0.0f);
+            setParameterValue(paramSongSelect, 0.0f);
+            setParameterValue(paramTuneRequest, 0.0f);
+            break;
+        case 4:  // Block System Real-Time
+            setParameterValue(paramFilterMode, 0.0f);
+            for (int i=1; i<paramCount; i++) {
+                setParameterValue(i, 1.0f);
+            }
+            setParameterValue(paramTimingClock, 0.0f);
+            setParameterValue(paramStart, 0.0f);
+            setParameterValue(paramContinue, 0.0f);
+            setParameterValue(paramStop, 0.0f);
+            setParameterValue(paramActiveSensing, 0.0f);
+            setParameterValue(paramSystemReset, 0.0f);
+            break;
+        case 5:  // Block Undefined
+            setParameterValue(paramFilterMode, 0.0f);
+            for (int i=1; i<paramCount; i++) {
+                setParameterValue(i, 1.0f);
+            }
+            setParameterValue(paramUndefined, 0.0f);
+            break;
+        case 6:  // Block Active Sensing
+            setParameterValue(paramFilterMode, 0.0f);
+            for (int i=1; i<paramCount; i++) {
+                setParameterValue(i, 1.0f);
+            }
+            setParameterValue(paramActiveSensing, 0.0f);
+            break;
+        case 7:  // Block Timing Clock
+            setParameterValue(paramFilterMode, 0.0f);
+            for (int i=1; i<paramCount; i++) {
+                setParameterValue(i, 1.0f);
+            }
+            setParameterValue(paramTimingClock, 0.0f);
+            break;
+        case 8:  // Pass any System messages only
+            setParameterValue(paramFilterMode, 1.0f);
+            for (int i=1; i<paramCount; i++) {
+                setParameterValue(i, 1.0f);
+            }
+            break;
+        case 9:  // Pass System Exclusive only
+            setParameterValue(paramFilterMode, 1.0f);
+            for (int i=1; i<paramCount; i++) {
+                setParameterValue(i, 0.0f);
+            }
+            setParameterValue(paramSystemExclusive, 1.0f);
+            break;
+        case 10:  // Pass System Common only
+            setParameterValue(paramFilterMode, 1.0f);
+            for (int i=1; i<paramCount; i++) {
+                setParameterValue(i, 0.0f);
+            }
+            setParameterValue(paramMTCQuarterFrame, 1.0f);
+            setParameterValue(paramSongPositionPointer, 1.0f);
+            setParameterValue(paramSongSelect, 1.0f);
+            setParameterValue(paramTuneRequest, 1.0f);
+            break;
+        case 11:  // Pass System Real-Time only
+            setParameterValue(paramFilterMode, 1.0f);
+            for (int i=1; i<paramCount; i++) {
+                setParameterValue(i, 0.0f);
+            }
+            setParameterValue(paramTimingClock, 1.0f);
+            setParameterValue(paramStart, 1.0f);
+            setParameterValue(paramContinue, 1.0f);
+            setParameterValue(paramStop, 1.0f);
+            setParameterValue(paramActiveSensing, 1.0f);
+            setParameterValue(paramSystemReset, 1.0f);
             break;
     }
 }
@@ -123,24 +298,63 @@ void PluginMIDIXForm::activate() {
 
 
 
-void PluginMIDIXForm::run(const float** inputs, float** outputs,
-                          uint32_t frames,
-                          const MidiEvent* midiEvents, uint32_t midiEventCount) {
+void PluginMIDIXForm::run(const float**, float**, uint32_t,
+                          const MidiEvent* events, uint32_t eventCount) {
+    bool pass;
 
-    // get the left and right audio inputs
-    const float* const inpL = inputs[0];
-    const float* const inpR = inputs[1];
+    for (uint32_t i=0; i<eventCount; ++i) {
 
-    // get the left and right audio outputs
-    float* const outL = outputs[0];
-    float* const outR = outputs[1];
+        if (events[i].size > MidiEvent::kDataSize &&
+            events[i].dataExt[0] == MIDI_SYSTEM_EXCLUSIVE)
+        {
+            pass = (bool) fParams[paramSystemExclusive];
+        }
+        else {
+            uint8_t status = events[i].data[0] & 0xFF;
 
-    float vol = fParams[paramVolume];
+            switch(status) {
+                case MIDI_MTC_QUARTER_FRAME:
+                    pass = (bool) fParams[paramMTCQuarterFrame];
+                    break;
+                case MIDI_SONG_POSITION_POINTER:
+                    pass = (bool) fParams[paramSongPositionPointer];
+                    break;
+                case MIDI_SONG_SELECT:
+                    pass = (bool) fParams[paramSongSelect];
+                    break;
+                case MIDI_TUNE_REQUEST:
+                    pass = (bool) fParams[paramTuneRequest];
+                    break;
+                case MIDI_TIMING_CLOCK:
+                    pass = (bool) fParams[paramTimingClock];
+                    break;
+                case MIDI_START:
+                    pass = (bool) fParams[paramStart];
+                    break;
+                case MIDI_CONTINUE:
+                    pass = (bool) fParams[paramContinue];
+                    break;
+                case MIDI_STOP:
+                    pass = (bool) fParams[paramStop];
+                    break;
+                case MIDI_ACTIVE_SENSING:
+                    pass = (bool) fParams[paramActiveSensing];
+                    break;
+                case MIDI_SYSTEM_RESET:
+                    pass = (bool) fParams[paramSystemReset];
+                    break;
+                case MIDI_UNDEFINED_F4:
+                case MIDI_UNDEFINED_F5:
+                case MIDI_UNDEFINED_F9:
+                case MIDI_UNDEFINED_FD:
+                    pass = (bool) fParams[paramUndefined];
+                    break;
+                default:
+                    pass = fParams[paramFilterMode] == 0 ? true : false;
+            }
+        }
 
-    // apply gain against all samples
-    for (uint32_t i=0; i < frames; ++i) {
-        outL[i] = inpL[i] * vol;
-        outR[i] = inpR[i] * vol;
+        if (pass) writeMidiEvent(events[i]);
     }
 }
 

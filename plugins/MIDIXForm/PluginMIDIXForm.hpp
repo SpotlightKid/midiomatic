@@ -31,12 +31,41 @@
 
 START_NAMESPACE_DISTRHO
 
+#define MIDI_SYSTEM_EXCLUSIVE 0xF0
+#define MIDI_MTC_QUARTER_FRAME 0xF1
+#define MIDI_SONG_POSITION_POINTER 0xF2
+#define MIDI_SONG_SELECT 0xF3
+#define MIDI_UNDEFINED_F4 0xF4
+#define MIDI_UNDEFINED_F5 0xF5
+#define MIDI_TUNE_REQUEST 0xF6
+#define MIDI_END_OF_EXCLUSIVE 0xF7
+#define MIDI_TIMING_CLOCK 0xF8
+#define MIDI_UNDEFINED_F9 0xF9
+#define MIDI_START 0xFA
+#define MIDI_CONTINUE 0xFB
+#define MIDI_STOP 0xFC
+#define MIDI_UNDEFINED_FD 0xFD
+#define MIDI_ACTIVE_SENSING 0xFE
+#define MIDI_SYSTEM_RESET 0xFF
+
 // -----------------------------------------------------------------------
 
 class PluginMIDIXForm : public Plugin {
 public:
     enum Parameters {
-        paramVolume = 0,
+        paramFilterMode,
+        paramSystemExclusive,
+        paramMTCQuarterFrame,
+        paramSongPositionPointer,
+        paramSongSelect,
+        paramTuneRequest,
+        paramTimingClock,
+        paramStart,
+        paramContinue,
+        paramStop,
+        paramActiveSensing,
+        paramSystemReset,
+        paramUndefined,
         paramCount
     };
 
@@ -76,7 +105,7 @@ protected:
     //
     // Get a proper plugin UID and fill it in here!
     int64_t getUniqueId() const noexcept override {
-        return d_cconst('a', 'b', 'c', 'd');
+        return d_cconst('M', 'X', 'F', 'm');
     }
 
     // -------------------------------------------------------------------
@@ -103,15 +132,14 @@ protected:
 
     void activate() override;
 
-    void run(const float**, float** outputs, uint32_t frames,
+    void run(const float**, float**, uint32_t,
              const MidiEvent* midiEvents, uint32_t midiEventCount) override;
 
 
     // -------------------------------------------------------------------
 
 private:
-    float    fParams[paramCount];
-    double   fSampleRate;
+    float fParams[paramCount];
 
     DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginMIDIXForm)
 };
