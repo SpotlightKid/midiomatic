@@ -27,12 +27,13 @@
 #ifndef DISTRHO_PLUGIN_INFO_H
 #define DISTRHO_PLUGIN_INFO_H
 
-#define DISTRHO_PLUGIN_BRAND "chrisarndt.de"
-#define DISTRHO_PLUGIN_NAME  "MIDISysFilter"
-#define DISTRHO_PLUGIN_URI   "https://chrisarndt.de/plugins/midisysfilter"
+#define DISTRHO_PLUGIN_BRAND        "chrisarndt.de"
+#define DISTRHO_PLUGIN_NAME         "MIDISysFilter"
+#define DISTRHO_PLUGIN_URI          "https://chrisarndt.de/plugins/midisysfilter"
+#define DISTRHO_PLUGIN_LV2_CATEGORY "lv2:MIDIPlugin"
 
-#define DISTRHO_PLUGIN_HAS_UI        0
-#define DISTRHO_UI_USE_NANOVG        0
+#define DISTRHO_PLUGIN_HAS_UI       0
+#define DISTRHO_UI_USE_NANOVG       0
 
 #define DISTRHO_PLUGIN_IS_RT_SAFE       1
 #define DISTRHO_PLUGIN_NUM_INPUTS       0
