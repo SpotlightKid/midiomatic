@@ -43,7 +43,6 @@ void PluginMIDISysFilter::initParameter(uint32_t index, Parameter& parameter) {
     if (index >= paramCount)
         return;
 
-    ParameterEnumerationValue* const modes = new ParameterEnumerationValue[2];
     parameter.hints = kParameterIsAutomable | kParameterIsBoolean;
     parameter.ranges.def = 0.0f;
     parameter.ranges.min = 0.0f;
@@ -54,13 +53,16 @@ void PluginMIDISysFilter::initParameter(uint32_t index, Parameter& parameter) {
             parameter.name = "Filter Mode";
             parameter.symbol = "filter_mode";
             parameter.hints = kParameterIsAutomable | kParameterIsInteger;
-            modes[0].label = "Block disabled events (pass all others)";
-            modes[0].value = 0;
-            modes[1].label = "Pass enabled events (block all others)";
-            modes[1].value = 1;
             parameter.enumValues.count = 2;
             parameter.enumValues.restrictedMode = true;
-            parameter.enumValues.values = modes;
+            {
+                ParameterEnumerationValue* const modes = new ParameterEnumerationValue[2];
+                parameter.enumValues.values = modes;
+                modes[0].label = "Block disabled events (pass all others)";
+                modes[0].value = 0;
+                modes[1].label = "Pass enabled events (block all others)";
+                modes[1].value = 1;
+            }
             break;
         case paramSystemExclusive:
             parameter.name = "System Exclusive (F0)";
