@@ -1,5 +1,5 @@
 /*
- * MIDI XForm audio effect based on DISTRHO Plugin Framework (DPF)
+ * MIDI SysFilter audio effect based on DISTRHO Plugin Framework (DPF)
  *
  * SPDX-License-Identifier: MIT
  *
