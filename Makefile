@@ -17,6 +17,7 @@ libs:
 
 plugins: libs
 	$(MAKE) all -C plugins/MIDISysFilter
+	$(MAKE) all -C plugins/MIDIPBToCC
 
 ifneq ($(CROSS_COMPILING),true)
 gen: plugins dpf/utils/lv2_ttl_generator
@@ -36,13 +37,16 @@ endif
 clean:
 	$(MAKE) clean -C dpf/utils/lv2-ttl-generator
 	$(MAKE) clean -C plugins/MIDISysFilter
+	$(MAKE) clean -C plugins/MIDIPBToCC
 	rm -rf bin build
 
 install: all
 	$(MAKE) install -C plugins/MIDISysFilter
+	$(MAKE) install -C plugins/MIDIPBToCC
 
 install-user: all
 	$(MAKE) install-user -C plugins/MIDISysFilter
+	$(MAKE) install-user -C plugins/MIDIPBToCC
 
 # --------------------------------------------------------------
 

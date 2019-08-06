@@ -12,9 +12,9 @@
 .kdev4/
 .DS_Store
 
-bin/midisysfilter
-bin/midisysfilter.exe
-bin/midisysfilter-ladspa.*
-bin/midisysfilter-dssi.*
-bin/midisysfilter-vst.*
-bin/midisysfilter.lv2/
+bin/midi*
+bin/midi*.exe
+bin/midi*-ladspa.*
+bin/midi*-dssi.*
+bin/midi*-vst.*
+bin/midi*.lv2/
