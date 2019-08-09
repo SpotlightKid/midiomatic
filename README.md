@@ -6,6 +6,29 @@ A collection of MIDI filter, generator and processor plugins
 ## Plugins
 
 
+### MIDI PBToCC
+
+Convert Pitch Bend into Control Change messages
+
+![MIDIPBToCC screenshot](screenshots/MIDIPBToCC.png)
+
+* Can act on all MIDI channels or a specific one.
+* Supports different destination Control Change number for positive *(CC A)*
+  and negative *(CC B)* Pitch Bend range.
+* Affected input Pitch Bend value range can be set, allowing, for example, to
+  convert only positive Pitch Bend values. If *PB min. value* is higher than
+  *PB max. value*, then only Pitch Bend values *outside* of the range are
+  converted.
+* Allows to set the output value range for the Control Change messages.
+  Positive Pitch Bend values within the input range set with *PB min. value*
+  and *PB max. value* are mapped to the range set with *CC A min. value* and
+  *CC A max. value*, negative Pitch Bend values within the input range are
+  mapped the range set with *CC B min. value* and *CC B max. value*.
+* Any unconverted messages are kept in the plugin's output.
+* Original Pitch Bend messages in the input range can be optionally kept as
+  well.
+
+
 ### MIDI SysFilter
 
 A filter for MIDI System Messages
