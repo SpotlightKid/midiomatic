@@ -32,11 +32,9 @@ START_NAMESPACE_DISTRHO
 // -----------------------------------------------------------------------
 
 PluginMIDIPBToCC::PluginMIDIPBToCC()
-    : Plugin(paramCount, 0, 0)  // paramCount params, 12 program(s), 0 states
+    : Plugin(paramCount, presetCount, 0)  // 0 states
 {
-    //~ for (int i = 0; i < paramCount; i++) {
-        //~ fParams[i] = 0.0;
-    //~ }
+    loadProgram(0);
 }
 
 // -----------------------------------------------------------------------
@@ -153,6 +151,16 @@ void PluginMIDIPBToCC::initParameter(uint32_t index, Parameter& parameter) {
    }
 }
 
+/**
+  Set the name of the program @a index.
+  This function will be called once, shortly after the plugin is created.
+*/
+void PluginMIDIPBToCC::initProgramName(uint32_t index, String& programName) {
+    if (index < presetCount) {
+        programName = factoryPresets[index].name;
+    }
+}
+
 // -----------------------------------------------------------------------
 // Internal data
 
@@ -193,6 +201,20 @@ void PluginMIDIPBToCC::setParameterValue(uint32_t index, float value) {
         case paramCC2Max:
             fParams[index] = CLAMP(floorf(value), 0, 127);
             break;
+    }
+}
+
+/**
+  Load a program.
+  The host may call this function from any context,
+  including realtime processing.
+*/
+void PluginMIDIPBToCC::loadProgram(uint32_t index) {
+    if (index < presetCount) {
+        for (int i=0; i < paramCount; i++) {
+            setParameterValue(i, factoryPresets[index].params[i]);
+        }
+
     }
 }
 

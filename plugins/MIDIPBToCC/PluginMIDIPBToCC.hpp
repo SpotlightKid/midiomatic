@@ -115,12 +115,14 @@ protected:
     // Init
 
     void initParameter(uint32_t index, Parameter& parameter) override;
+    void initProgramName(uint32_t index, String& programName) override;
 
     // -------------------------------------------------------------------
     // Internal data
 
     float getParameterValue(uint32_t index) const override;
     void setParameterValue(uint32_t index, float value) override;
+    void loadProgram(uint32_t index) override;
 
     // -------------------------------------------------------------------
     // Optional
@@ -145,6 +147,24 @@ private:
 
     DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginMIDIPBToCC)
 };
+
+struct Preset {
+    const char* name;
+    float params[PluginMIDIPBToCC::paramCount];
+};
+
+Preset factoryPresets[] = {
+    {
+        "Modulation +/-",
+        {0.0, 0.0, -8192.0, 8191.0, 1.0, 0.0, 127.0, 1.0, 0.0, 127.0}
+    },
+    {
+        "PB + / Mod -",
+        {0.0, 0.0, -8192.0, -1, 1.0, 0.0, 127.0, 1.0, 0.0, 127.0}
+    }
+};
+
+uint presetCount = sizeof(factoryPresets) / sizeof(Preset);
 
 // -----------------------------------------------------------------------
 
