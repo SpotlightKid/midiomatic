@@ -164,7 +164,7 @@ Preset factoryPresets[] = {
     }
 };
 
-uint presetCount = sizeof(factoryPresets) / sizeof(Preset);
+const uint presetCount = sizeof(factoryPresets) / sizeof(Preset);
 
 // -----------------------------------------------------------------------
 
