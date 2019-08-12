@@ -24,8 +24,8 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef PLUGIN_MIDISYSFILTER_H
-#define PLUGIN_MIDISYSFILTER_H
+#ifndef PLUGIN_MIDIPBTOCC_H
+#define PLUGIN_MIDIPBTOCC_H
 
 #include "DistrhoPlugin.hpp"
 
@@ -170,4 +170,4 @@ const uint presetCount = sizeof(factoryPresets) / sizeof(Preset);
 
 END_NAMESPACE_DISTRHO
 
-#endif  // #ifndef PLUGIN_MIDISYSFILTER_H
+#endif  // #ifndef PLUGIN_MIDIPBTOCC_H
