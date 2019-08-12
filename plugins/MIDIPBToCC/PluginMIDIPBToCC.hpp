@@ -83,7 +83,7 @@ protected:
     }
 
     const char* getDescription() const override {
-        return "Convert PitchBend into Control Change messages";
+        return "Convert Pitch Bend into Control Change messages";
     }
 
     const char* getMaker() const noexcept override {
