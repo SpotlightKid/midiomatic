@@ -99,10 +99,9 @@ void PluginMIDIPBToCC::initParameter(uint32_t index, Parameter& parameter) {
             break;
         case paramKeepOriginal:
             parameter.name = "Keep original PB events";
+            parameter.shortName = "Keep PB";
             parameter.symbol = "keep_original";
-            parameter.hints = kParameterIsAutomable | kParameterIsBoolean;
-            parameter.ranges.def = 0;
-            parameter.ranges.min = 0;
+            parameter.hints |= kParameterIsBoolean;
             parameter.ranges.max = 1;
             break;
         case paramPBMin:
@@ -132,7 +131,6 @@ void PluginMIDIPBToCC::initParameter(uint32_t index, Parameter& parameter) {
             parameter.name = "CC A max. value";
             parameter.symbol = "cc1_max";
             parameter.ranges.def = 127;
-            break;
             break;
         case paramCC2:
             parameter.name = "Neg. PB -> CC A";
@@ -184,14 +182,15 @@ float PluginMIDIPBToCC::getParameterValue(uint32_t index) const {
 void PluginMIDIPBToCC::setParameterValue(uint32_t index, float value) {
     switch (index) {
         case paramFilterChannel:
-            filterChannel = CLAMP(floorf(value) - 1, -1, 15);
+            filterChannel = (int8_t) CLAMP(value - 1, -1, 15);
+            fParams[index] = value;
             break;
         case paramKeepOriginal:
-            fParams[index] = CLAMP(floorf(value), 0, 1);
+            fParams[index] = CLAMP(value, 0.0f, 1.0f);
             break;
         case paramPBMin:
         case paramPBMax:
-            fParams[index] = CLAMP(floorf(value), -8192, 8191);
+            fParams[index] = CLAMP(value, -8192.0f, 8191.0f);
             break;
         case paramCC1:
         case paramCC1Min:
@@ -199,7 +198,7 @@ void PluginMIDIPBToCC::setParameterValue(uint32_t index, float value) {
         case paramCC2:
         case paramCC2Min:
         case paramCC2Max:
-            fParams[index] = CLAMP(floorf(value), 0, 127);
+            fParams[index] = CLAMP(value, 0.0f, 127.0f);
             break;
     }
 }
