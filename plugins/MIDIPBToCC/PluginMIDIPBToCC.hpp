@@ -150,10 +150,10 @@ private:
 
 struct Preset {
     const char* name;
-    float params[PluginMIDIPBToCC::paramCount];
+    const float params[PluginMIDIPBToCC::paramCount];
 };
 
-Preset factoryPresets[] = {
+const Preset factoryPresets[] = {
     {
         "Modulation +/-",
         {0.0, 0.0, -8192.0, 8191.0, 1.0, 0.0, 127.0, 1.0, 0.0, 127.0}
