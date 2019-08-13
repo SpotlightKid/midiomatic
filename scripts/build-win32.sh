@@ -17,7 +17,10 @@ export CXXFLAGS="${_FLAGS}"
 export CROSS_COMPILING=true
 
 # Start clean
-make clean >/dev/null
+make clean > /dev/null
+make -C dpf clean > /dev/null
+rm -rf bin-w32
 
 # Build now
 make
+mv bin bin-w32
