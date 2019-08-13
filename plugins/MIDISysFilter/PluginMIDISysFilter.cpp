@@ -43,7 +43,7 @@ void PluginMIDISysFilter::initParameter(uint32_t index, Parameter& parameter) {
     if (index >= paramCount)
         return;
 
-    parameter.hints = kParameterIsAutomable | kParameterIsBoolean;
+    parameter.hints = kParameterIsAutomable | kParameterIsBoolean | kParameterIsInteger;
     parameter.ranges.def = 0.0f;
     parameter.ranges.min = 0.0f;
     parameter.ranges.max = 1.0f;
