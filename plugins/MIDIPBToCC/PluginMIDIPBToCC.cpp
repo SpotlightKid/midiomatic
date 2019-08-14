@@ -24,7 +24,6 @@
  * IN THE SOFTWARE.
  */
 
-#include <math.h>
 #include "PluginMIDIPBToCC.hpp"
 
 START_NAMESPACE_DISTRHO
@@ -182,8 +181,8 @@ float PluginMIDIPBToCC::getParameterValue(uint32_t index) const {
 void PluginMIDIPBToCC::setParameterValue(uint32_t index, float value) {
     switch (index) {
         case paramFilterChannel:
-            filterChannel = (int8_t) CLAMP(value - 1, -1, 15);
-            fParams[index] = value;
+            fParams[index] = CLAMP(value - 1.0f, -1.0f, 15.0f);
+            filterChannel = (int8_t) fParams[index];
             break;
         case paramKeepOriginal:
             fParams[index] = CLAMP(value, 0.0f, 1.0f);
