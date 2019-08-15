@@ -1,5 +1,5 @@
 /*
- * MIDI PBToCC plugin based on DISTRHO Plugin Framework (DPF)
+ * MIDI CCRecorder plugin based on DISTRHO Plugin Framework (DPF)
  *
  * SPDX-License-Identifier: MIT
  *
@@ -28,8 +28,8 @@
 #define DISTRHO_PLUGIN_INFO_H
 
 #define DISTRHO_PLUGIN_BRAND        "chrisarndt.de"
-#define DISTRHO_PLUGIN_NAME         "MIDIPBToCC"
-#define DISTRHO_PLUGIN_URI          "https://chrisarndt.de/plugins/midipbtocc"
+#define DISTRHO_PLUGIN_NAME         "MIDICCRecorder"
+#define DISTRHO_PLUGIN_URI          "https://chrisarndt.de/plugins/midiccrecorder"
 #define DISTRHO_PLUGIN_LV2_CATEGORY "lv2:MIDIPlugin"
 
 #define DISTRHO_PLUGIN_HAS_UI       0
@@ -40,6 +40,8 @@
 #define DISTRHO_PLUGIN_NUM_OUTPUTS      0
 #define DISTRHO_PLUGIN_WANT_TIMEPOS     0
 #define DISTRHO_PLUGIN_WANT_PROGRAMS    1
+#define DISTRHO_PLUGIN_WANT_STATE       1
+#define DISTRHO_PLUGIN_WANT_FULL_STATE  1
 #define DISTRHO_PLUGIN_WANT_MIDI_INPUT  1
 #define DISTRHO_PLUGIN_WANT_MIDI_OUTPUT 1
 

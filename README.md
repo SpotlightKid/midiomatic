@@ -6,11 +6,35 @@ A collection of MIDI filter, generator and processor plugins
 ## Plugins
 
 
+### MIDI CCRecorder
+
+Store received Control Change messages and replay them when triggered
+
+![MIDI CCRecorder screenshot](screenshots/MIDICCRecorder.png)
+
+* While "Record" is enabled, the plugin stores the last seen value of each
+  Control Change message on each MIDI channel sent to its input.
+* When the "Send" trigger input is activated, all stored Control Change
+  messages on the channel selected with "Send Channel" are sent to its
+  output.
+* If "Send Channel" is set to "All", all stored Control Change messages on all
+  channels are sent.
+* While sending is in progress, the "Send" trigger input is ignored.
+* While sending is in progress, no new Control Change messages are stored
+  and Control Change messages received on the "Send Channel" are not
+  passed through to the output.
+* When the "Clear" trigger input is activated, all stored Control Change
+  messages are cleared.
+* The plugin state including all stored Control Change messages will be stored
+  by the host and, if the host supports it, will be restored with the host
+  session or when a preset is loaded.
+
+
 ### MIDI PBToCC
 
 Convert Pitch Bend into Control Change messages
 
-![MIDIPBToCC screenshot](screenshots/MIDIPBToCC.png)
+![MIDI PBToCC screenshot](screenshots/MIDIPBToCC.png)
 
 * Can act on all MIDI channels or a specific one.
 * Supports different destination Control Change number for positive *(CC A)*
@@ -33,7 +57,7 @@ Convert Pitch Bend into Control Change messages
 
 A filter for MIDI System Messages
 
-![MIDISysFilter screenshot](screenshots/MIDISysFilter.png)
+![MIDI SysFilter screenshot](screenshots/MIDISysFilter.png)
 
 
 ## Plugin Formats
