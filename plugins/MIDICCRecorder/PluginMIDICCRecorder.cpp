@@ -180,8 +180,11 @@ void PluginMIDICCRecorder::setParameterValue(uint32_t index, float value) {
             fParams[index] = CLAMP(value, 0, 1);
 
             if (fParams[index] > 0.0f) {
-                if (!sendInProgress)
+                if (!sendInProgress) {
                     sendChannel = fParams[paramSendChannel];
+                    curChan = 0;
+                    curCC = 0;
+                }
 
                 sendInProgress = true;
             }
