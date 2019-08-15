@@ -1,5 +1,5 @@
 /*
- * MIDI CCRecorder audio effect based on DISTRHO Plugin Framework (DPF)
+ * MIDI CCRecorder plugin based on DISTRHO Plugin Framework (DPF)
  *
  * SPDX-License-Identifier: MIT
  *
