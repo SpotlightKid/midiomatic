@@ -24,7 +24,7 @@
  * IN THE SOFTWARE.
  */
 
-#include <iostream>
+// #include <iostream>
 #include <iomanip>
 #include <vector>
 
@@ -238,11 +238,11 @@ void PluginMIDICCRecorder::setState(const char* key, const char* value) {
                     stateCC[index][i] = state[i];
                 }
 
-                std::cerr << "State 'ch-" << index << "': ";
-                for (uint i=0; i < 128; i++) {
-                    std::cerr << (uint) stateCC[index][i] << ",";
-                }
-                std::cerr << std::endl;
+                // std::cerr << "State 'ch-" << index << "': ";
+                // for (uint i=0; i < 128; i++) {
+                //     std::cerr << (uint) stateCC[index][i] << ",";
+                // }
+                // std::cerr << std::endl;
             }
         }
     }
