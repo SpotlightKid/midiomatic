@@ -74,7 +74,7 @@ protected:
     }
 
     const char* getDescription() const override {
-        return "Store received Control Change messages and replay them hwne triggered";
+        return "Store received Control Change messages and replay them when triggered";
     }
 
     const char* getMaker() const noexcept override {
