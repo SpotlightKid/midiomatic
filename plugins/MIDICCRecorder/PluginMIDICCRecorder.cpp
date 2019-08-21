@@ -181,7 +181,7 @@ void PluginMIDICCRecorder::setParameterValue(uint32_t index, float value) {
 
             if (fParams[index] > 0.0f) {
                 if (!sendInProgress) {
-                    sendChannel = fParams[paramSendChannel];
+                    sendChannel = fParams[paramSendChannel] - 1;
                     curChan = 0;
                     curCC = 0;
                 }
@@ -191,7 +191,7 @@ void PluginMIDICCRecorder::setParameterValue(uint32_t index, float value) {
 
             break;
         case paramSendChannel:
-            fParams[index] = CLAMP(value - 1, -1, 15);
+            fParams[index] = CLAMP(value, 0, 16);;
             break;
     }
 }
