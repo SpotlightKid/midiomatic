@@ -89,8 +89,10 @@ ifeq ($(BUILD_LV2),true)
 	@install -dm755 $(DESTDIR)$(LV2_DIR) && \
 		cp -rf $(TARGET_DIR)/$(NAME).lv2 $(DESTDIR)$(LV2_DIR)
 endif
+ifeq ($(BUILD_JACK),true)
 ifeq ($(HAVE_JACK),true)
 	@install -Dm755 $(TARGET_DIR)/$(NAME)$(APP_EXT) -t $(DESTDIR)$(BINDIR)
+endif
 endif
 
 install-user: all
