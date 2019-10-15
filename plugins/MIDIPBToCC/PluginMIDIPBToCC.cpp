@@ -233,7 +233,6 @@ void PluginMIDIPBToCC::run(const float**, float**, uint32_t,
             pb_max = (uint16_t) fParams[paramPBMax];
     struct MidiEvent cc_event;
 
-
     for (uint32_t i=0; i<eventCount; ++i) {
         pass = true;
 
