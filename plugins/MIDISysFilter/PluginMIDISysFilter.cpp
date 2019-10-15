@@ -317,7 +317,6 @@ void PluginMIDISysFilter::run(const float**, float**, uint32_t,
     bool pass;
 
     for (uint32_t i=0; i<eventCount; ++i) {
-
         if (events[i].size > MidiEvent::kDataSize &&
             events[i].dataExt[0] == MIDI_SYSTEM_EXCLUSIVE)
         {
