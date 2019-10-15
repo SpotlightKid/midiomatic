@@ -8,7 +8,10 @@ A collection of MIDI filter, generator and processor plugins
 
 ### MIDI CCRecorder
 
-Store received Control Change messages and replay them when triggered
+Store received Control Change messages and replay them when triggered.
+
+**note:** *This plugin is still experimental. I recommend not using
+it in an important project.*
 
 ![MIDI CCRecorder screenshot](screenshots/MIDICCRecorder.png)
 
