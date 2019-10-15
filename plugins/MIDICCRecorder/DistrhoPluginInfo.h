@@ -28,7 +28,7 @@
 #define DISTRHO_PLUGIN_INFO_H
 
 #define DISTRHO_PLUGIN_BRAND        "chrisarndt.de"
-#define DISTRHO_PLUGIN_NAME         "MIDICCRecorder"
+#define DISTRHO_PLUGIN_NAME         "MIDI CC Recorder"
 #define DISTRHO_PLUGIN_URI          "https://chrisarndt.de/plugins/midiccrecorder"
 #define DISTRHO_PLUGIN_LV2_CATEGORY "lv2:MIDIPlugin"
 
