@@ -181,8 +181,8 @@ float PluginMIDIPBToCC::getParameterValue(uint32_t index) const {
 void PluginMIDIPBToCC::setParameterValue(uint32_t index, float value) {
     switch (index) {
         case paramFilterChannel:
-            fParams[index] = CLAMP(value - 1.0f, -1.0f, 15.0f);
-            filterChannel = (int8_t) fParams[index];
+            fParams[index] = CLAMP(value, 0.0f, 16.0f);
+            filterChannel = (int8_t) fParams[index] - 1;
             break;
         case paramKeepOriginal:
             fParams[index] = CLAMP(value, 0.0f, 1.0f);
