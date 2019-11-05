@@ -181,7 +181,7 @@ void PluginMIDICCRecorder::setParameterValue(uint32_t index, float value) {
 
             if (fParams[index] > 0.0f) {
                 if (!sendInProgress) {
-                    sendChannel = fParams[paramSendChannel] - 1;
+                    sendChannel = fParams[paramSendChannel];
                     curChan = 0;
                     curCC = 0;
                 }
@@ -308,7 +308,7 @@ void PluginMIDICCRecorder::run(const float**, float**, uint32_t,
         if (status == MIDI_CONTROL_CHANGE) {
             chan = events[i].data[0] & 0x0F;
 
-            if (sendInProgress && (sendChannel == -1 || sendChannel == (int) chan))
+            if (sendInProgress && (sendChannel == 0 || sendChannel == (int) chan + 1))
                 block = true;
 
             if (fParams[paramRecordEnable] && ! sendInProgress) {
@@ -323,7 +323,7 @@ void PluginMIDICCRecorder::run(const float**, float**, uint32_t,
     if (sendInProgress) {
         bool sendOk = true;
         do {
-            if ((sendChannel == -1 || sendChannel == (int) curChan) &&
+            if ((sendChannel == 0 || sendChannel == (int) curChan + 1) &&
                 stateCC[curChan][curCC] != 0xFF)
             {
                 cc_event.frame = 0;
