@@ -11,7 +11,7 @@ all: libs plugins gen
 # --------------------------------------------------------------
 
 submodules:
-	git submodule update --init --recursive
+	-test -d .git && git submodule update --init --recursive
 
 libs: submodules patch
 
