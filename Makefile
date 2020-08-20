@@ -13,7 +13,11 @@ all: libs plugins gen
 submodules:
 	git submodule update --init --recursive
 
-libs:
+libs: submodules patch
+
+patch:
+	-patch -d dpf -r - -p1 -N -i ../patches/dpf/no-port-name-lv2-prefix.patch
+	-patch -d dpf -r - -p1 -N -i ../patches/dpf/fix-lv2-version-export.patch
 
 plugins: libs
 	$(MAKE) all -C plugins/MIDICCRecorder
@@ -57,4 +61,4 @@ install-user: all
 
 # --------------------------------------------------------------
 
-.PHONY: all clean install install-user plugins submodule
+.PHONY: all clean gen install install-user libs patch plugins submodule
