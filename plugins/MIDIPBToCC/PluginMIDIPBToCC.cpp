@@ -132,7 +132,7 @@ void PluginMIDIPBToCC::initParameter(uint32_t index, Parameter& parameter) {
             parameter.ranges.def = 127;
             break;
         case paramCC2:
-            parameter.name = "Neg. PB -> CC A";
+            parameter.name = "Neg. PB -> CC B";
             parameter.symbol = "cc2";
             parameter.ranges.def = 1;
             break;
