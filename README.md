@@ -10,8 +10,9 @@ A collection of MIDI filter, generator and processor plugins
 
 Store received Control Change messages and replay them when triggered.
 
-**note:** *This plugin is still experimental. I recommend not using
-it in an important project.*
+**note:** *This plugin is still experimental. I recommend not using it in an
+important project. The LV2 version should work as described, but there may be
+issues with the VST2 version due to poor support for trigger inputs.*
 
 ![MIDI CCRecorder screenshot](screenshots/MIDICCRecorder.png)
 
@@ -40,7 +41,7 @@ Convert Pitch Bend into Control Change messages
 ![MIDI PBToCC screenshot](screenshots/MIDIPBToCC.png)
 
 * Can act on all MIDI channels or a specific one.
-* Supports different destination Control Change number for positive *(CC A)*
+* Supports different destination Control Change numbers for positive *(CC A)*
   and negative *(CC B)* Pitch Bend range.
 * Affected input Pitch Bend value range can be set, allowing, for example, to
   convert only positive Pitch Bend values. If *PB min. value* is higher than
@@ -50,10 +51,10 @@ Convert Pitch Bend into Control Change messages
   Positive Pitch Bend values within the input range set with *PB min. value*
   and *PB max. value* are mapped to the range set with *CC A min. value* and
   *CC A max. value*, negative Pitch Bend values within the input range are
-  mapped the range set with *CC B min. value* and *CC B max. value*.
+  mapped to the range set with *CC B min. value* and *CC B max. value*.
 * Any unconverted messages are kept in the plugin's output.
 * Original Pitch Bend messages in the input range can be optionally kept as
-  well.
+  well (useful, for example, to cascade several instances of this plugin).
 
 
 ### MIDI SysFilter
