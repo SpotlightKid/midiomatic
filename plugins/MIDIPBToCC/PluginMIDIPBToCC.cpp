@@ -113,7 +113,7 @@ void PluginMIDIPBToCC::initParameter(uint32_t index, Parameter& parameter) {
         case paramPBMax:
             parameter.name = "PB max. value";
             parameter.symbol = "pb_max";
-            parameter.ranges.def = -8192;
+            parameter.ranges.def = 8192;
             parameter.ranges.min = -8192;
             parameter.ranges.max = 8191;
             break;
