@@ -1,9 +1,9 @@
 /*
- * MIDI PBToCC plugin based on DISTRHO Plugin Framework (DPF)
+ * MIDI PressureToCC plugin based on DISTRHO Plugin Framework (DPF)
  *
  * SPDX-License-Identifier: MIT
  *
- * Copyright (C) 2019 Christopher Arndt <info@chrisarndt.de>
+ * Copyright (C) 2019 Christopher Arndt <info@chrisarndt.de>, Jorik Jonker <jorik@kippendief.biz>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -28,7 +28,7 @@
 #define DISTRHO_PLUGIN_INFO_H
 
 #define DISTRHO_PLUGIN_BRAND        "chrisarndt.de"
-#define DISTRHO_PLUGIN_NAME         "MIDI Channel Pressure (Aftertouch) to CC"
+#define DISTRHO_PLUGIN_NAME         "MIDI Pressure to CC"
 #define DISTRHO_PLUGIN_URI          "https://chrisarndt.de/plugins/midipressuretocc"
 #define DISTRHO_PLUGIN_LV2_CATEGORY "lv2:MIDIPlugin"
 

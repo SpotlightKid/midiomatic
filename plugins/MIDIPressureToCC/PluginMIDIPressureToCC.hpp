@@ -3,7 +3,7 @@
  *
  * SPDX-License-Identifier: MIT
  *
- * Copyright (C) 2019 Christopher Arndt <info@chrisarndt.de>
+ * Copyright (C) 2019 Christopher Arndt <info@chrisarndt.de>, Jorik Jonker <jorik@kippendief.biz>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -24,8 +24,8 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef PLUGIN_MIDIPressureTOCC_H
-#define PLUGIN_MIDIPressureTOCC_H
+#ifndef PLUGIN_MIDIPRESSURETOCC_H
+#define PLUGIN_MIDIPRESSURETOCC_H
 
 #include "DistrhoPlugin.hpp"
 
@@ -53,7 +53,7 @@ public:
     enum Parameters {
         paramFilterChannel,
         paramKeepOriginal,
-        paramCC,
+        paramDestCC,
         paramCount
     };
 
@@ -68,7 +68,7 @@ protected:
     }
 
     const char* getDescription() const override {
-        return "Convert Monophonic Channel Pressure (Aftertouch) into Control Change messages";
+        return "Convert monophonic Channel Pressure (Aftertouch) into Control Change messages";
     }
 
     const char* getMaker() const noexcept override {
@@ -84,7 +84,7 @@ protected:
     }
 
     uint32_t getVersion() const noexcept override {
-        return d_version(1, 2, 2);
+        return d_version(1, 0, 0);
     }
 
     // Go to:
@@ -148,6 +148,10 @@ const Preset factoryPresets[] = {
         {0.0, 0.0, 2.0}
     },
     {
+        "Foot Controller",
+        {0.0, 0.0, 4.0}
+    },
+    {
         "Expression",
         {0.0, 0.0, 11.0}
     }
@@ -159,4 +163,4 @@ const uint presetCount = sizeof(factoryPresets) / sizeof(Preset);
 
 END_NAMESPACE_DISTRHO
 
-#endif  // #ifndef PLUGIN_MIDIPressureTOCC_H
+#endif  // #ifndef PLUGIN_MIDIPRESSURETOCC_H

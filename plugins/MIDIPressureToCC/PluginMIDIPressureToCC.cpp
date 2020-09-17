@@ -1,5 +1,5 @@
 /*
- * MIDI PBToCC plugin based on DISTRHO Plugin Framework (DPF)
+ * MIDI PressureToCC plugin based on DISTRHO Plugin Framework (DPF)
  *
  * SPDX-License-Identifier: MIT
  *
@@ -103,9 +103,9 @@ void PluginMIDIPressureToCC::initParameter(uint32_t index, Parameter& parameter)
             parameter.hints |= kParameterIsBoolean;
             parameter.ranges.max = 1;
             break;
-        case paramCC:
-            parameter.name = "Target CC";
-            parameter.symbol = "cc";
+        case paramDestCC:
+            parameter.name = "Destination CC";
+            parameter.symbol = "dest_cc";
             parameter.ranges.def = 1;
             break;
    }
@@ -150,7 +150,7 @@ void PluginMIDIPressureToCC::setParameterValue(uint32_t index, float value) {
         case paramKeepOriginal:
             fParams[index] = CLAMP(value, 0.0f, 1.0f);
             break;
-        case paramCC:
+        case paramDestCC:
             fParams[index] = CLAMP(value, 0.0f, 127.0f);
             break;
     }
@@ -179,7 +179,7 @@ void PluginMIDIPressureToCC::activate() {
 
 
 void PluginMIDIPressureToCC::run(const float**, float**, uint32_t,
-                           const MidiEvent* events, uint32_t eventCount) {
+                                 const MidiEvent* events, uint32_t eventCount) {
     uint8_t chan;
     struct MidiEvent cc_event;
 
@@ -194,8 +194,8 @@ void PluginMIDIPressureToCC::run(const float**, float**, uint32_t,
         if (filterChannel == -1 || chan == filterChannel) {
             cc_event.frame = events[i].frame;
             cc_event.size = 3;
-	    cc_event.data[0] = MIDI_CONTROL_CHANGE | chan;
-            cc_event.data[1] = (uint8_t) fParams[paramCC];
+            cc_event.data[0] = MIDI_CONTROL_CHANGE | chan;
+            cc_event.data[1] = (uint8_t) fParams[paramDestCC];
             cc_event.data[2] = events[i].data[1] & 0x7f;
             writeMidiEvent(cc_event);
         }
