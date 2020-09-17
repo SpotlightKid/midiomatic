@@ -6,6 +6,42 @@ A collection of MIDI filter, generator and processor plugins
 ## Plugins
 
 
+### MIDI CC Map X4
+
+Map a single input CC to up to four output CCs.
+
+![MIDI CC Map X4 screenshot](screenshots/MIDICCMapX4.png)
+
+* Can act on a selected CC received on all MIDI channels or a specific one.
+* Converts the matching source Control Change message into up-to-four
+  destination CCs.
+* Each of the four destination CCs can be enabled separately and the following
+  settings can be set for each (where X = 1..4):
+    * `CC X Mode` - Enable destination CC X and set the control value mapping
+      mode.
+    * `CC X Destination` - the controller number
+    * `CC X Channel` - the MIDI channel
+    * `CC X Filter repeated values` - when enabled, if the control value
+      (after conversion) of the destination Control Change message is the same
+      as the one sent before (for this channel and controller number), it is
+      supressed.
+    * `CC X Start` and. `CC X End` - the value range of the source
+      Control Change message, which gets converted into this destination CC.
+
+        If `Start > End`, only messages, whose controller value lies *outside*
+        of the range `End` .. `Start` , are converted.
+    * `CC X Minimum value` resp. `CC X maximum value` - the value range of
+      the destination Control Change message to which the range of the source
+      values is mapped.
+
+        If `Minimum > Maximum`, the destination value range is inverted.
+* Any unmatched Control Change messages or other events are kept in the
+  plugin's output.
+* The original source Control Change messages can be optionally kept in the
+  plugin's output (useful, for example, to cascade several instances of this
+  plugin).
+
+
 ### MIDI CCRecorder
 
 Store received Control Change messages and replay them when triggered.
@@ -36,7 +72,7 @@ issues with the VST2 version due to poor support for trigger inputs.*
 
 ### MIDI PBToCC
 
-Convert Pitch Bend into Control Change messages
+Convert Pitch Bend into Control Change messages.
 
 ![MIDI PBToCC screenshot](screenshots/MIDIPBToCC.png)
 
@@ -74,7 +110,7 @@ messages
 
 ### MIDI SysFilter
 
-A filter for MIDI System Messages
+A filter for MIDI System Messages.
 
 ![MIDI SysFilter screenshot](screenshots/MIDISysFilter.png)
 
