@@ -25,12 +25,12 @@ Map a single input CC to up to four output CCs.
       (after conversion) of the destination Control Change message is the same
       as the one sent before (for this channel and controller number), it is
       supressed.
-    * `CC X Start` and. `CC X End` - the value range of the source
+    * `CC X Start` and `CC X End` - the value range of the source
       Control Change message, which gets converted into this destination CC.
 
         If `Start > End`, only messages, whose controller value lies *outside*
         of the range `End` .. `Start` , are converted.
-    * `CC X Minimum value` resp. `CC X maximum value` - the value range of
+    * `CC X Minimum value` and `CC X maximum value` - the value range of
       the destination Control Change message to which the range of the source
       values is mapped.
 
@@ -38,8 +38,8 @@ Map a single input CC to up to four output CCs.
 * Any unmatched Control Change messages or other events are kept in the
   plugin's output.
 * The original source Control Change messages can be optionally kept in the
-  plugin's output (useful, for example, to cascade several instances of this
-  plugin).
+  plugin's output too (useful, for example, to cascade several instances of
+  this plugin).
 
 
 ### MIDI CCRecorder
