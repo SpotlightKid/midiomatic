@@ -22,6 +22,7 @@ patch:
 plugins: libs
 	$(MAKE) all -C plugins/MIDICCRecorder
 	$(MAKE) all -C plugins/MIDIPBToCC
+	$(MAKE) all -C plugins/MIDIPressureToCC
 	$(MAKE) all -C plugins/MIDISysFilter
 
 ifneq ($(CROSS_COMPILING),true)
@@ -46,17 +47,20 @@ clean:
 	$(MAKE) clean -C dpf/utils/lv2-ttl-generator
 	$(MAKE) clean -C plugins/MIDICCRecorder
 	$(MAKE) clean -C plugins/MIDIPBToCC
+	$(MAKE) clean -C plugins/MIDIPressureToCC
 	$(MAKE) clean -C plugins/MIDISysFilter
 	rm -rf bin build
 
 install: all
 	$(MAKE) install -C plugins/MIDICCRecorder
 	$(MAKE) install -C plugins/MIDIPBToCC
+	$(MAKE) install -C plugins/MIDIPressureToCC
 	$(MAKE) install -C plugins/MIDISysFilter
 
 install-user: all
 	$(MAKE) install-user -C plugins/MIDICCRecorder
 	$(MAKE) install-user -C plugins/MIDIPBToCC
+	$(MAKE) install-user -C plugins/MIDIPressureToCC
 	$(MAKE) install-user -C plugins/MIDISysFilter
 
 # --------------------------------------------------------------

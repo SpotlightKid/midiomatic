@@ -57,6 +57,21 @@ Convert Pitch Bend into Control Change messages
   well (useful, for example, to cascade several instances of this plugin).
 
 
+### MIDI PressureToCC
+
+Convert (monophonic) Channel Pressure (Aftertouch) into Control Change
+messages 
+
+![MIDI PressureToCC screenshot](screenshots/MIDIPressureToCC.png)
+
+* Can act on all MIDI channels or a specific one.
+* Configurable destination controller (0-127): modulation, breath, expression,
+  etc.
+* Any unconverted messages are kept in the plugin's output.
+* Original Channel Pressure messages can be optionally kept as well (useful,
+  for example, to cascade several instances of this plugin).
+
+
 ### MIDI SysFilter
 
 A filter for MIDI System Messages
