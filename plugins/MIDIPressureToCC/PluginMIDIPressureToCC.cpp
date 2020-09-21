@@ -3,7 +3,7 @@
  *
  * SPDX-License-Identifier: MIT
  *
- * Copyright (C) 2019 Christopher Arndt <info@chrisarndt.de>
+ * Copyright (C) 2020 Christopher Arndt <info@chrisarndt.de>, Jorik Jonker <jorik@kippendief.biz>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
