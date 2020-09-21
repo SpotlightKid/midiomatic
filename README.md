@@ -60,7 +60,7 @@ Convert Pitch Bend into Control Change messages
 ### MIDI PressureToCC
 
 Convert (monophonic) Channel Pressure (Aftertouch) into Control Change
-messages 
+messages
 
 ![MIDI PressureToCC screenshot](screenshots/MIDIPressureToCC.png)
 
@@ -149,9 +149,13 @@ This software is distributed under the MIT License.
 See the file [LICENSE](./LICENSE) for more information.
 
 
-## Author
+## Authors
 
 This software is written by *Christopher Arndt*.
+
+Contributions by:
+
+* *Jorik Jonker* (MIDI Pressure To CC plugin)
 
 
 ## Acknowledgements
