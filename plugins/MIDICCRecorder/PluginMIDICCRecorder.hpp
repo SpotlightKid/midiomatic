@@ -48,6 +48,7 @@ START_NAMESPACE_DISTRHO
 #endif
 
 #define MIDI_CONTROL_CHANGE 0xB0
+#define MIDI_PROGRAM_CHANGE 0xC0
 #define NUM_CHANNELS 16
 #define NUM_CONTROLLERS 128
 
@@ -59,8 +60,11 @@ public:
         paramRecordEnable = 0,
         paramTrigClear,
         paramTrigSend,
+        paramTrigTransport,
+        paramTrigPCChannel,
+        paramTrigPC,
         paramSendChannel,
-        paramSendOnTransportStart,
+        paramSendInterval,
         paramCount
     };
 
@@ -91,7 +95,7 @@ protected:
     }
 
     uint32_t getVersion() const noexcept override {
-        return d_version(0, 0, 1);
+        return d_version(0, 1, 0);
     }
 
     // Go to:
@@ -138,10 +142,10 @@ protected:
 
 private:
     float fParams[paramCount];
-    int8_t sendChannel;
+    double fSampleRate;
     uint8_t stateCC[NUM_CHANNELS][NUM_CONTROLLERS];
-    bool sendInProgress, playing;
-    uint8_t curChan, curCC;
+    uint8_t curChan, curCC, sendChannel;
+    bool playing, sendInProgress;
 
     DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginMIDICCRecorder)
 };
@@ -154,7 +158,7 @@ struct Preset {
 Preset factoryPresets[] = {
     {
         "Default",
-        {0.0f, 0.0f, 0.0f, 0.0f, 0.0f}
+        {0, 0, 0, 0, 17, 0, 0, 1.0}
     },
 };
 
