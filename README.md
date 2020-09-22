@@ -57,6 +57,8 @@ issues with the VST2 version due to poor support for trigger inputs.*
 * When the "Send" trigger input is activated, all stored Control Change
   messages on the channel selected with "Send Channel" are sent to its
   output.
+* Sending can also be triggered when the transport state of the host
+  changes to "playing", optionally only when the transport position is zero.
 * If "Send Channel" is set to "All", all stored Control Change messages on all
   channels are sent.
 * While sending is in progress, the "Send" trigger input is ignored.
