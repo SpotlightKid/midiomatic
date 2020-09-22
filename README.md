@@ -60,8 +60,8 @@ issues with the VST2 version due to poor support for trigger inputs.*
 * Sending can also be triggered when the transport state of the host
   changes to "playing", optionally only when the transport position is zero.
 * Lastly, sending can be triggered when receiving a selected MIDI Program
-  Change event. There parameters to set the program number and the MIDI
-  channel, which activate the trigger.
+  Change event. There are parameters to set the program number and the MIDI
+  channel of the PC event, which will trigger sending, when received.
 * If "Send Channel" is set to "All", all stored Control Change messages on all
   channels are sent.
 * The interval between sending each Control Change event can be set to
