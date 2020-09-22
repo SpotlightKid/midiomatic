@@ -36,7 +36,7 @@ START_NAMESPACE_DISTRHO
 // -----------------------------------------------------------------------
 
 PluginMIDICCRecorder::PluginMIDICCRecorder()
-    : Plugin(paramCount, presetCount, stateCount)
+    : Plugin(paramCount, presetCount, stateCount), playing(false)
 {
     clearState();
     loadProgram(0);
@@ -74,7 +74,7 @@ void PluginMIDICCRecorder::initParameter(uint32_t index, Parameter& parameter) {
             parameter.ranges.max = 1;
             break;
         case paramSendChannel:
-            parameter.name = "Send Channel";
+            parameter.name = "Send channel";
             parameter.symbol = "send_channel";
             parameter.ranges.max = 16;
             parameter.enumValues.count = 17;
@@ -116,6 +116,23 @@ void PluginMIDICCRecorder::initParameter(uint32_t index, Parameter& parameter) {
                 channels[15].value = 15;
                 channels[16].label = "Channel 16";
                 channels[16].value = 16;
+            }
+            break;
+        case paramSendOnTransportStart:
+            parameter.name = "Send on transport start?";
+            parameter.symbol = "send_on_start";
+            parameter.ranges.max = 2;
+            parameter.enumValues.count = 3;
+            parameter.enumValues.restrictedMode = true;
+            {
+                ParameterEnumerationValue* const channels = new ParameterEnumerationValue[3];
+                parameter.enumValues.values = channels;
+                channels[0].label = "Disabled";
+                channels[0].value = 0;
+                channels[1].label = "Enabled";
+                channels[1].value = 1;
+                channels[2].label = "Only at Position 0";
+                channels[2].value = 2;
             }
             break;
    }
@@ -180,18 +197,15 @@ void PluginMIDICCRecorder::setParameterValue(uint32_t index, float value) {
             fParams[index] = CLAMP(value, 0, 1);
 
             if (fParams[index] > 0.0f) {
-                if (!sendInProgress) {
-                    sendChannel = fParams[paramSendChannel];
-                    curChan = 0;
-                    curCC = 0;
-                }
-
-                sendInProgress = true;
+                startSend();
             }
 
             break;
         case paramSendChannel:
             fParams[index] = CLAMP(value, 0, 16);;
+            break;
+        case paramSendOnTransportStart:
+            fParams[index] = CLAMP(value, 0, 2);;
             break;
     }
 }
@@ -289,12 +303,28 @@ void PluginMIDICCRecorder::activate() {
     curCC = 0;
 }
 
+/*
+ *  Start sending.
+ */
+void PluginMIDICCRecorder::startSend() {
+    if (!sendInProgress) {
+        sendChannel = fParams[paramSendChannel];
+        curChan = 0;
+        curCC = 0;
+    }
+
+    sendInProgress = true;
+}
+
+
 
 void PluginMIDICCRecorder::run(const float**, float**, uint32_t,
                                const MidiEvent* events, uint32_t eventCount) {
     uint8_t cc, chan, status;
     struct MidiEvent cc_event;
     bool block;
+
+    const TimePosition& pos(getTimePosition());
 
     for (uint32_t i=0; i<eventCount; ++i) {
         block = false;
@@ -318,6 +348,18 @@ void PluginMIDICCRecorder::run(const float**, float**, uint32_t,
         }
 
         if (!block) writeMidiEvent(events[i]);
+    }
+
+    if (pos.playing and !playing) {
+        playing = true;
+
+        if (fParams[paramSendOnTransportStart] == 1 ||
+           (fParams[paramSendOnTransportStart] == 2 && pos.frame == 0)) {
+            startSend();
+        }
+    }
+    else if (!pos.playing && playing) {
+        playing = false;
     }
 
     if (sendInProgress) {

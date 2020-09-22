@@ -60,6 +60,7 @@ public:
         paramTrigClear,
         paramTrigSend,
         paramSendChannel,
+        paramSendOnTransportStart,
         paramCount
     };
 
@@ -129,6 +130,7 @@ protected:
     // Process
 
     void activate() override;
+    void startSend();
     void run(const float**, float**, uint32_t,
              const MidiEvent* midiEvents, uint32_t midiEventCount) override;
 
@@ -138,7 +140,7 @@ private:
     float fParams[paramCount];
     int8_t sendChannel;
     uint8_t stateCC[NUM_CHANNELS][NUM_CONTROLLERS];
-    bool sendInProgress;
+    bool sendInProgress, playing;
     uint8_t curChan, curCC;
 
     DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginMIDICCRecorder)
@@ -152,7 +154,7 @@ struct Preset {
 Preset factoryPresets[] = {
     {
         "Default",
-        {0.0f, 0.0f, 0.0f, 0.0f}
+        {0.0f, 0.0f, 0.0f, 0.0f, 0.0f}
     },
 };
 
