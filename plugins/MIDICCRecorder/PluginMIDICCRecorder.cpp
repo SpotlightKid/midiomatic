@@ -90,7 +90,7 @@ void PluginMIDICCRecorder::initParameter(uint32_t index, Parameter& parameter) {
             break;
         case paramTrigPCChannel:
             parameter.name = "Trigger send on PC?";
-            parameter.shortName = "Program Change ch.";
+            parameter.shortName = "Trigger by PC?";
             parameter.symbol = "trig_pc_chan";
             parameter.ranges.def = 17;
             parameter.ranges.max = 17;
@@ -138,8 +138,8 @@ void PluginMIDICCRecorder::initParameter(uint32_t index, Parameter& parameter) {
             }
             break;
         case paramTrigPC:
-            parameter.name = "Program change";
-            parameter.symbol = "pc_send";
+            parameter.name = "Program number";
+            parameter.symbol = "trig_pc";
             parameter.ranges.max = 127;
             break;
         case paramSendChannel:
