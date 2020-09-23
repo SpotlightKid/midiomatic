@@ -42,15 +42,15 @@ Map a single input CC to up to four output CCs.
   this plugin).
 
 
-### MIDI CCRecorder
+### MIDI CC Recorder
 
 Store received Control Change messages and replay them when triggered.
 
-**note:** *This plugin is still experimental. I recommend not using it in an
-important project. The LV2 version should work as described, but there may be
-issues with the VST2 version due to poor support for trigger inputs.*
+**note:** *This plugin is still considered in beta stage. I recommend not using
+it in an important project. The LV2 version should work as described, but there
+may be issues with the VST2 version due to poor support for trigger inputs.*
 
-![MIDI CCRecorder screenshot](screenshots/MIDICCRecorder.png)
+![MIDI CC Recorder screenshot](screenshots/MIDICCRecorder.png)
 
 * While "Record" is enabled, the plugin stores the last seen value of each
   Control Change message on each MIDI channel sent to its input.
@@ -77,11 +77,25 @@ issues with the VST2 version due to poor support for trigger inputs.*
   session or when a preset is loaded.
 
 
-### MIDI PBToCC
+### MIDI CC to Pressure
+
+Convert Control Change messages into (monophonic) Channel Pressure (Aftertouch)
+
+![MIDI CC to Pressure screenshot](screenshots/MIDICCToPressure.png)
+
+* Can act on all MIDI channels or a specific one.
+* Configurable source controller number (0-127): modulation, breath, foot
+  controller, expression, etc.
+* Any unconverted messages are kept in the plugin's output.
+* Original sourec Control Change messages can be optionally kept as well (useful,
+  for example, to cascade other plugins handling the same CC after this plugin).
+
+
+### MIDI PB to CC
 
 Convert Pitch Bend into Control Change messages.
 
-![MIDI PBToCC screenshot](screenshots/MIDIPBToCC.png)
+![MIDI PB to CC screenshot](screenshots/MIDIPBToCC.png)
 
 * Can act on all MIDI channels or a specific one.
 * Supports different destination Control Change numbers for positive *(CC A)*
@@ -100,26 +114,26 @@ Convert Pitch Bend into Control Change messages.
   well (useful, for example, to cascade several instances of this plugin).
 
 
-### MIDI PressureToCC
+### MIDI Pressure to CC
 
 Convert (monophonic) Channel Pressure (Aftertouch) into Control Change
 messages
 
-![MIDI PressureToCC screenshot](screenshots/MIDIPressureToCC.png)
+![MIDI Pressure to CC screenshot](screenshots/MIDIPressureToCC.png)
 
 * Can act on all MIDI channels or a specific one.
-* Configurable destination controller (0-127): modulation, breath, expression,
-  etc.
+* Configurable destination controller number (0-127): modulation, breath, foot
+  controller, expression, etc.
 * Any unconverted messages are kept in the plugin's output.
 * Original Channel Pressure messages can be optionally kept as well (useful,
   for example, to cascade several instances of this plugin).
 
 
-### MIDI SysFilter
+### MIDI Sys Filter
 
 A filter for MIDI System Messages.
 
-![MIDI SysFilter screenshot](screenshots/MIDISysFilter.png)
+![MIDI Sys Filter screenshot](screenshots/MIDISysFilter.png)
 
 
 ## Plugin Formats

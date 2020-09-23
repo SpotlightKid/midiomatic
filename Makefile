@@ -29,6 +29,7 @@ patch:
 plugins: libs
 	$(MAKE) all -C plugins/MIDICCMapX4
 	$(MAKE) all -C plugins/MIDICCRecorder
+	$(MAKE) all -C plugins/MIDICCToPressure
 	$(MAKE) all -C plugins/MIDIPBToCC
 	$(MAKE) all -C plugins/MIDIPressureToCC
 	$(MAKE) all -C plugins/MIDISysFilter
@@ -55,6 +56,7 @@ clean:
 	$(MAKE) clean -C dpf/utils/lv2-ttl-generator
 	$(MAKE) clean -C plugins/MIDICCMapX4
 	$(MAKE) clean -C plugins/MIDICCRecorder
+	$(MAKE) clean -C plugins/MIDICCToPressure
 	$(MAKE) clean -C plugins/MIDIPBToCC
 	$(MAKE) clean -C plugins/MIDIPressureToCC
 	$(MAKE) clean -C plugins/MIDISysFilter
@@ -63,6 +65,7 @@ clean:
 install: all
 	$(MAKE) install -C plugins/MIDICCMapX4
 	$(MAKE) install -C plugins/MIDICCRecorder
+	$(MAKE) install -C plugins/MIDICCToPressure
 	$(MAKE) install -C plugins/MIDIPBToCC
 	$(MAKE) install -C plugins/MIDIPressureToCC
 	$(MAKE) install -C plugins/MIDISysFilter
@@ -70,6 +73,7 @@ install: all
 install-user: all
 	$(MAKE) install-user -C plugins/MIDICCMapX4
 	$(MAKE) install-user -C plugins/MIDICCRecorder
+	$(MAKE) install-user -C plugins/MIDICCToPressure
 	$(MAKE) install-user -C plugins/MIDIPBToCC
 	$(MAKE) install-user -C plugins/MIDIPressureToCC
 	$(MAKE) install-user -C plugins/MIDISysFilter
