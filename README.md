@@ -2,6 +2,10 @@
 
 A collection of MIDI filter, generator and processor plugins
 
+[![Latest version](https://shields.io/github/v/release/SpotlightKid/midiomatic)](https://github.com/SpotlightKid/midiomatic/releases)
+![Date of latest release](https://shields.io/github/release-date/SpotlightKid/midiomatic)
+[![MIT license](https://shields.io/aur/license/midiomatic)](./LICENSE)
+
 
 ## Plugins
 
