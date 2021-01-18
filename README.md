@@ -9,6 +9,8 @@ A collection of MIDI filter, generator and processor plugins
 
 ## Plugins
 
+[![All midiomatic plugins loade in Carla](./screenshots/allplugins-carla.png)](./plugins.md)
+
 [MIDI CC Map X4](./plugins.md#midi-cc-map-x4) - Map a single input CC to up to
 four output CCs.
 
