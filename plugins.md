@@ -23,8 +23,8 @@ Map a single input CC to up to four output CCs.
     * `CC X Start` and `CC X End` - the value range of the source
       Control Change message, which gets converted into this destination CC.
 
-        If `Start > End`, only messages, whose controller value lies *outside*
-        of the range `End` .. `Start` , are converted.
+        If `Start > End`, only messages, whose controller values lie *outside*
+        of the range `End` .. `Start`, are converted.
     * `CC X Minimum value` and `CC X maximum value` - the value range of
       the destination Control Change message to which the range of the source
       values is mapped.
@@ -41,9 +41,10 @@ Map a single input CC to up to four output CCs.
 
 Store received Control Change messages and replay them when triggered.
 
-**note:** *This plugin is still considered in beta stage. I recommend not using
-it in an important project. The LV2 version should work as described, but there
-may be issues with the VST2 version due to poor support for trigger inputs.*
+**Note:** *This plugin is still considered to be in beta stage. I recommend not
+using it in an important project. The LV2 version should work as described, but
+there may be issues with the VST2 version due to poor support for trigger
+inputs.*
 
 ![MIDI CC Recorder screenshot](screenshots/MIDICCRecorder.png)
 
@@ -82,7 +83,7 @@ Convert Control Change messages into (monophonic) Channel Pressure (Aftertouch).
 * Configurable source controller number (0-127): modulation, breath, foot
   controller, expression, etc.
 * Any unconverted messages are kept in the plugin's output.
-* Original sourec Control Change messages can be optionally kept as well (useful,
+* Original source Control Change messages can be optionally kept as well (useful,
   for example, to cascade other plugins handling the same CC after this plugin).
 
 

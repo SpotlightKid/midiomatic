@@ -13,7 +13,7 @@ A collection of MIDI filter, generator and processor plugins
 four output CCs.
 
 [MIDI CC Recorder](./plugins.md#midi-cc-recorder) - Store received Control
-Change messages and replay them when. triggered.
+Change messages and replay them when triggered.
 
 [MIDI CC to Pressure](./plugins.md#midi-cc-to-pressure) - Convert Control
 Change messages into (monophonic) Channel Pressure (Aftertouch).
