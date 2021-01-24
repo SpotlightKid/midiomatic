@@ -3,6 +3,22 @@
 
 ## New plugins
 
+### Note to Program Change / Bank Select
+
+Sends Bank Select LSB and/or MSB (optional) and Program Change triggered
+by a received Note On or Note Off in a specified range.
+
+* Input Channel (Any, 1..16)
+* Keep other events
+* Source Note Min
+* Source Note Max
+* Destination:
+  * Channel (Source, 1..16)
+  * Program Change (None, 0..127)
+  * Bank MSB Select (None, 0..127)
+  * Bank LSB Select (None, 0..127)
+
+
 ### Program Change Trigger x 8
 
 Send up to 8 Bank Select MSB/LSB and PC messages triggered by a
@@ -15,10 +31,10 @@ Params:
 * Source PC
 * Send Trigger
 * PC #1
-  * PC (None, 0..127)
-  * Channel (1..16)
-  * Bank MSB (None, 0..127)
-  * Bank LSB (None, 0..127)
+  * Channel (Source, 1..16)
+  * Program Change (None, 0..127)
+  * Bank MSB Select (None, 0..127)
+  * Bank LSB Select (None, 0..127)
 * PC #2
   * ...
 
