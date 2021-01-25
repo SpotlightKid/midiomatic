@@ -90,6 +90,14 @@ Done.
 Route notes to different MIDI channels depending on "voice".
 
 
+### PitchBend Enforce Scale
+
+Scale PitchBend dynamically according to specified musical scale and last
+played note.
+
+Would only work properly with monophonic material or MPE.
+
+
 ## New Features
 
 ### MIDI CC Recorder
