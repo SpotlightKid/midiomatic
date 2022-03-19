@@ -1,6 +1,20 @@
 ChangeLog
 =========
 
+0.2.1 (2022-03-19)
+------------------
+
+Fixes:
+
+* `MIDICCRecorder`: fixed default value of `send_interval` parameter.
+* `MIDIPBToCC`: fixed default value of `pb_max` parameter.
+
+Changes:
+
+* Made Makefile less repetitive and fixed `submodules` target.
+* Updated `dpf` submodule to commit ab3e4c36 on (old) `master` branch.
+
+
 0.2.0 (2021-01-15)
 ------------------
 
@@ -15,7 +29,7 @@ Features:
 
 Fixes:
 
-* `MIDIPBToCC`: fixed sign of default 'pb_max' parameter value.
+* `MIDIPBToCC`: fixed sign of default `pb_max` parameter value.
 * Several small readme corrections.
 
 Changes:
