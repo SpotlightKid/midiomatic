@@ -191,6 +191,7 @@ void PluginMIDICCRecorder::initParameter(uint32_t index, Parameter& parameter) {
             parameter.name = "Send interval (ms)";
             parameter.unit = "ms";
             parameter.symbol = "send_interval";
+            parameter.ranges.def = 1;
             parameter.ranges.min = 1;
             parameter.ranges.max = 200;
             break;
