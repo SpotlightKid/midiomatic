@@ -2,7 +2,7 @@ MIDI-o-matic plugin collection based on DISTRHO Plugin Framework (DPF)
 
 SPDX-License-Identifier: MIT
 
-Copyright (C) 2019 Christopher Arndt <info@chrisarndt.de>
+Copyright (C) 2019 - 2022 Christopher Arndt <info@chrisarndt.de>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to
