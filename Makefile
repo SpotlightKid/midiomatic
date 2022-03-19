@@ -4,13 +4,23 @@
 # Created by falkTX, Christopher Arndt, and Patrick Desaulniers
 #
 
-include dpf/Makefile.base.mk
+SHELL=/bin/bash
+
+-include dpf/Makefile.base.mk
 
 all: libs plugins gen
 
 # --------------------------------------------------------------
 
-PATCHES = \
+PLUGINS = \
+	MIDICCMapX4 \
+	MIDICCRecorder \
+	MIDICCToPressure \
+	MIDIPBToCC \
+	MIDIPressureToCC \
+	MIDISysFilter
+
+DPF_PATCHES = \
 	dpf/lv2-port-groups.patch \
 	dpf/fix-lv2-version-export.patch \
 	dpf/no-port-name-lv2-prefix.patch
@@ -20,19 +30,16 @@ submodules:
 
 libs: submodules patch
 
-patch:
-	@-for p in $(PATCHES); do \
+patch: submodules
+	@-for p in $(DPF_PATCHES); do \
 		echo "Applying patch '$${p}'..."; \
 		patch -d dpf -r - -p1 -N -i ../patches/$${p}; \
 	done
 
-plugins: libs
-	$(MAKE) all -C plugins/MIDICCMapX4
-	$(MAKE) all -C plugins/MIDICCRecorder
-	$(MAKE) all -C plugins/MIDICCToPressure
-	$(MAKE) all -C plugins/MIDIPBToCC
-	$(MAKE) all -C plugins/MIDIPressureToCC
-	$(MAKE) all -C plugins/MIDISysFilter
+plugins: $(PLUGINS)
+
+$(PLUGINS):
+	$(MAKE) all -C plugins/$@
 
 ifneq ($(CROSS_COMPILING),true)
 gen: plugins dpf/utils/lv2_ttl_generator
@@ -54,30 +61,21 @@ endif
 
 clean:
 	$(MAKE) clean -C dpf/utils/lv2-ttl-generator
-	$(MAKE) clean -C plugins/MIDICCMapX4
-	$(MAKE) clean -C plugins/MIDICCRecorder
-	$(MAKE) clean -C plugins/MIDICCToPressure
-	$(MAKE) clean -C plugins/MIDIPBToCC
-	$(MAKE) clean -C plugins/MIDIPressureToCC
-	$(MAKE) clean -C plugins/MIDISysFilter
+	@for plug in $(PLUGINS); do \
+		$(MAKE) clean -C plugins/$${plug}; \
+	done
 	rm -rf bin build
 
 install: all
-	$(MAKE) install -C plugins/MIDICCMapX4
-	$(MAKE) install -C plugins/MIDICCRecorder
-	$(MAKE) install -C plugins/MIDICCToPressure
-	$(MAKE) install -C plugins/MIDIPBToCC
-	$(MAKE) install -C plugins/MIDIPressureToCC
-	$(MAKE) install -C plugins/MIDISysFilter
+	@for plug in $(PLUGINS); do \
+		$(MAKE) install -C plugins/$${plug}; \
+	done
 
 install-user: all
-	$(MAKE) install-user -C plugins/MIDICCMapX4
-	$(MAKE) install-user -C plugins/MIDICCRecorder
-	$(MAKE) install-user -C plugins/MIDICCToPressure
-	$(MAKE) install-user -C plugins/MIDIPBToCC
-	$(MAKE) install-user -C plugins/MIDIPressureToCC
-	$(MAKE) install-user -C plugins/MIDISysFilter
+	@for plug in $(PLUGINS); do \
+		$(MAKE) install-user -C plugins/$${plug}; \
+	done
 
 # --------------------------------------------------------------
 
-.PHONY: all clean gen install install-user libs patch plugins submodule
+.PHONY: all clean gen install install-user libs patch plugins submodules
