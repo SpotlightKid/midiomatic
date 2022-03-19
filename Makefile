@@ -25,6 +25,8 @@ DPF_PATCHES = \
 	dpf/fix-lv2-version-export.patch \
 	dpf/no-port-name-lv2-prefix.patch
 
+PLUGIN_BASE_URI = https://chrisarndt.de/plugins/
+
 submodules:
 	-test -d .git && git submodule update --init --recursive
 
@@ -59,6 +61,14 @@ endif
 
 # --------------------------------------------------------------
 
+check: plugins
+	@for plug in $(PLUGINS); do \
+		lv2lint -Mpack -q -s lv2_generate_ttl -t "Plugin Author Email" \
+			-I bin/$${plug,,}.lv2/ "$(PLUGIN_BASE_URI)$${plug,,}"; \
+	done
+
+# --------------------------------------------------------------
+
 clean:
 	$(MAKE) clean -C dpf/utils/lv2-ttl-generator
 	@for plug in $(PLUGINS); do \
@@ -78,4 +88,4 @@ install-user: all
 
 # --------------------------------------------------------------
 
-.PHONY: all clean gen install install-user libs patch plugins submodules
+.PHONY: all clean check gen install install-user libs patch plugins submodules

@@ -92,6 +92,11 @@ No special makefile variables are used in this case.
 
 * [pkgconf]
 
+Optional (only needed for checking plugins after building them):
+
+* [lv2lint]
+* [KXStudio LV2 Extensions]
+
 
 ## License
 
@@ -116,7 +121,9 @@ Build using the DISTRHO Plugin Framework ([DPF]) and set up with the
 
 
 [cookiecutter-dpf-effect]: https://github.com/SpotlightKid/cookiecutter-dpf-effect
-[DPF]: https://github.com/DISTRHO/DPF
-[LV2]: http://lv2plug.in/
+[dpf]: https://github.com/DISTRHO/DPF
+[kxstudio lv2 extensions]: https://github.com/KXStudio/LV2-Extensions
+[lv2]: http://lv2plug.in/
+[lv2lint]: https://open-music-kontrollers.ch/lv2/lv2lint/
 [pkgconf]: https://github.com/pkgconf/pkgconf
-[VST2]: https://en.wikipedia.org/wiki/Virtual_Studio_Technology
+[vst2]: https://en.wikipedia.org/wiki/Virtual_Studio_Technology
